@@ -1,13 +1,14 @@
 import React from 'react'
 import logo from '../../../../public/logo.jpeg'
 import DropDown from './DropDown'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     const navbarOptions = <>
-        <li><a> Home</a></li>
-        <li><a> Instructors</a></li>
-        <li><a>Classes</a></li>
-        <li><a> Instructors</a></li>
+        <li className='font-bold'><Link to='/'>Home</Link></li> 
+        <li className='font-bold'><Link to='/login'>Instructors</Link></li> 
+        <li className='font-bold'><Link to='/'>Classes</Link></li> 
+ 
     </>
     return (
         <>
@@ -30,7 +31,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                  <DropDown></DropDown>
+                    <DropDown></DropDown>
                 </div>
             </div>
         </>
