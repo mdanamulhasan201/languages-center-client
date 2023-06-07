@@ -7,10 +7,12 @@ const Instructorss = ({ instructor }) => {
             <div class="box-item ">
                 <div class="flip-box">
                     <div class="flip-box-front text-center" style={{ height: '550px', backgroundImage: `url("https://www.devsnews.com/template/micoach/micoach/assets/img/team/01.jpg")` }}>
-                        <div class="inner color-white">
-                            <h3 class="flip-box-header">{instructor.instructor}</h3>
-                            <p>{instructor.language}</p>
-                            <img src="" alt="" />
+                        <div class="inner color-white mt-48 bg-base-200 ">
+                            <h3 class="text-2xl font-bold text-black text-left">{instructor.instructor}</h3>
+                            <p className='text-gray-400 text-left'>{instructor.language}</p>
+                            <hr className=' border-2 text-red-500' />
+                            <p className='text-black'>courses: { instructor.courses}</p>
+                            
                         </div>
                     </div>
 

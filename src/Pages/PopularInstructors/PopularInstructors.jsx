@@ -13,7 +13,7 @@ const PopularInstructors = () => {
     return (
         <>
             <h2 className='text-center text-4xl font-bold my-10'>Popular <span className='text-[#55d6af]'>Instructors</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
                 {
                     instructors.map(instructor =>
