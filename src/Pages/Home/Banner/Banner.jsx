@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import PopularClasses from '../PopularClasses/PopularClasses';
+
 import PopularInstructors from '../../PopularInstructors/PopularInstructors';
 
 
@@ -80,9 +80,6 @@ const Banner = () => {
                     </div>
                 </div>
             </Carousel>
-
-           <PopularClasses></PopularClasses>
-           <PopularInstructors></PopularInstructors>
         </div>
     );
 };

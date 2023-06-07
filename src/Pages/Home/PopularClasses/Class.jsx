@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Class = ({ classs }) => {
+const Class = ({ classs  }) => {
     const { language, price, duration, image, deadline, enrolled, instructor, title, rating } = classs
     return (
 
         <div href="" className="card">
-            <img src="https://i.imgur.com/oYiTqum.jpg" className="card__image" alt="" />
+            <img src="https://i.ibb.co/RcDtD4X/hand-drawn-world-book-day-concept-23-2148481517.jpg" className="card__image" alt="" />
             <div className="card__overlay">
                 <div className="card__header">
                     <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
