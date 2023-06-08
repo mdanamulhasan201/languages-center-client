@@ -7,7 +7,7 @@ const Navbar = () => {
     const navbarOptions = <>
         <li className='font-bold'><Link to='/'>Home</Link></li> 
         <li className='font-bold'><Link to='/instructors'>Instructors</Link></li> 
-        <li className='font-bold'><Link to='/'>Classes</Link></li> 
+        <li className='font-bold'><Link to='/allClasses'>Classes</Link></li> 
  
     </>
     return (

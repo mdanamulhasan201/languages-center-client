@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './PopularClasses.css';
 import { FaArrowRight } from "react-icons/fa";
 import Class from './Class';
+import { Link } from 'react-router-dom';
 
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -23,7 +24,9 @@ const PopularClasses = () => {
         ))}
       </div>
       <div className="flex justify-center">
-        <button className="btn">show more <FaArrowRight/></button>
+        <Link to='/allClasses'>
+          <button className="btn">All Classes <FaArrowRight /></button>
+        </Link>
       </div>
     </div>
   );
