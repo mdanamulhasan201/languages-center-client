@@ -3,15 +3,16 @@ import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
-import { TbFidgetSpinner } from 'react-icons/tb';
+// import { SquareLoader } from 'react-icons/tb';
 import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
+import { ScaleLoader } from 'react-spinners';
 // import img from '../../assets/images/login.jpg';
 
 const Login = () => {
     const { loading, setLoading, signIn, signInWithGoogle, resetPassword } =
         useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
-    
+
     const navigate = useNavigate()
     const emailRef = useRef()
     const location = useLocation()
@@ -100,7 +101,9 @@ const Login = () => {
                             className='bg-[#55D6AF] w-full rounded-md py-3 text-white'
                         >
                             {loading ? (
-                                <TbFidgetSpinner className='m-auto animate-spin' size={24} />
+                                <ScaleLoader color="#ffffff"
+                                    height={15}
+                                    width={2} size={5} />
                             ) : (
                                 'Continue'
                             )}
