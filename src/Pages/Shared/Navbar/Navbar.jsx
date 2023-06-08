@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
     const navbarOptions = <>
         <li className='font-bold'><Link to='/'>Home</Link></li> 
-        <li className='font-bold'><Link to='/login'>Instructors</Link></li> 
+        <li className='font-bold'><Link to='/instructors'>Instructors</Link></li> 
         <li className='font-bold'><Link to='/'>Classes</Link></li> 
  
     </>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PopularInstructor.css'
 import Instructorss from './Instructorss';
+import { FaArrowRight } from "react-icons/fa";
 
 const PopularInstructors = () => {
     const [instructors, setInstructor] = useState([]);
@@ -26,7 +27,7 @@ const PopularInstructors = () => {
 
             </div>
             <div className="flex justify-center">
-                <button className="btn my-5">show more</button>
+                <button className="btn my-5">show more<FaArrowRight/> </button>
             </div>
         </>
 
