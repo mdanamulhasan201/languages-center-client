@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Rating } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css'
 
-const Class = ({ classs  }) => {
+const Class = ({ classs }) => {
     const { language, price, duration, image, deadline, enrolled, instructor, title, rating } = classs
     return (
 
@@ -24,13 +26,21 @@ const Class = ({ classs  }) => {
                             </div>
 
                             <div className='ms-2'>
-                                <h2> rating: {rating}</h2>
+
+                                Time{duration}
                             </div>
                         </div>
 
                         <div className='flex justify-around my-2'>
                             <div>   <h2 className='mr-4'>enroll {enrolled}</h2></div>
-                            <div>Time{duration}</div>
+                            <div>
+                                <Rating
+                                    style={{ maxWidth: 120 }}
+                                    value={rating}
+                                    readOnly
+                                />
+
+                            </div>
                         </div>
 
 

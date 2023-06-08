@@ -1,5 +1,7 @@
 import React from 'react';
 import './PopularInstructor.css'
+import { Rating } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css'
 
 const Instructorss = ({ instructor }) => {
     return (
@@ -14,9 +16,14 @@ const Instructorss = ({ instructor }) => {
                 </h2>
                 <p>If a dog chews shoes whose shoes does he choose?</p>
                 <button className='justify-center btn btn-sm my-2 bg-[#55d6af]'>Details</button>
+                <hr className='my-2' />
                 <div className="card-actions justify-between">
                     <div className="badge badge-outline">{instructor.courses}+ Courses</div>
-                    <div className="badge badge-outline">rating {instructor.rating}</div>
+                    <div className=""><Rating
+                        style={{ maxWidth: 120 }}
+                        value={instructor.rating}
+                        readOnly
+                    /></div>
                 </div>
             </div>
         </div>
