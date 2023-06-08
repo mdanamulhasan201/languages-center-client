@@ -5,7 +5,7 @@ const Class = ({ classs  }) => {
     const { language, price, duration, image, deadline, enrolled, instructor, title, rating } = classs
     return (
 
-        <div href="" className="card">
+        <div href="" className="card shadow-2xl">
             <img src="https://i.ibb.co/RcDtD4X/hand-drawn-world-book-day-concept-23-2148481517.jpg" className="card__image" alt="" />
             <div className="card__overlay">
                 <div className="card__header">
