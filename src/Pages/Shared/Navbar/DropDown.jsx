@@ -5,15 +5,18 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider'
 import { toast } from 'react-hot-toast'
 import { FaCartPlus } from 'react-icons/fa'
+import useCart from '../../../hook/useCart'
 
 const DropDown = () => {
     // const { user, logOut } = useContext(AuthContext)
     const { user, logOut } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
 
+    const [cart] = useCart()
+
     const handleLogOut = () => {
         logOut()
-            .then(() => { 
+            .then(() => {
                 toast.success('Log out Successful')
             })
             .catch(error => {
@@ -24,9 +27,9 @@ const DropDown = () => {
     return (
         <div className='relative z-50'>
             <div className='flex flex-row items-center gap-3'>
-            <button className='btn btn-sm bg-[#55d6af]'>
-                <FaCartPlus className='text-2xl'></FaCartPlus>
-               <p className='font-bold'> +0</p>
+                <button className='btn btn-sm bg-[#55d6af]'>
+                    <FaCartPlus className='text-2xl'></FaCartPlus>
+                    <p className='font-bold'> +{cart?.length || 0}</p>
                 </button>
                 <div className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
                     Dashboard
