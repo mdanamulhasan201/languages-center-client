@@ -24,7 +24,10 @@ const DropDown = () => {
     return (
         <div className='relative z-50'>
             <div className='flex flex-row items-center gap-3'>
-            <button><FaCartPlus></FaCartPlus></button>
+            <button className='btn btn-sm bg-[#55d6af]'>
+                <FaCartPlus className='text-2xl'></FaCartPlus>
+               <p className='font-bold'> +0</p>
+                </button>
                 <div className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
                     Dashboard
                 </div>

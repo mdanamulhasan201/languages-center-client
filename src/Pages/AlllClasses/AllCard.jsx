@@ -1,14 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css'
 import { IoIosPeople } from "react-icons/io";
 import { IoIosTime } from "react-icons/io";
 import { FaArrowRight, FaShoppingCart } from "react-icons/fa";
 import './AllCard.css'
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const AllCard = ({ classs }) => {
-    const { language, price, duration, image, deadline, enrolled, instructor, title, rating } = classs
+    const { language, price, duration, image, deadline, enrolled, instructor, title, rating, _id } = classs
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const handleAddToCart = classs => {
+        console.log(classs)
+        if (user && user.email) {
+            const addToCart = { classsId: _id, name, price, image, email: user.email }
+            fetch('http://localhost:5000/carts', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(addToCart)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        toast.success('Add to Cart Successful')
+                    }
+                })
+        }
+        else {
+            toast.error('Please login to Enrolled the language')
+            navigate('/login', { state: { from: location } })
+        }
+    }
     return (
         <div className="card mx-auto my-5 shadow-xl">
             <img src="https://i.ibb.co/RcDtD4X/hand-drawn-world-book-day-concept-23-2148481517.jpg" className="card__image" alt="" />
@@ -58,7 +88,7 @@ const AllCard = ({ classs }) => {
 
                 <div className='flex justify-around'>
                     <div>
-                        <button className="btn btn-sm mb-5 ms-4">
+                        <button onClick={() => handleAddToCart(classs)} className="btn btn-sm mb-5 ms-4">
                             <FaShoppingCart className='text-xl' />
                             Add to Cart</button>
                     </div>
