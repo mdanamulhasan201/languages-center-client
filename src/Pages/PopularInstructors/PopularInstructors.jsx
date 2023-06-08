@@ -5,9 +5,8 @@ import { FaArrowRight } from "react-icons/fa";
 
 const PopularInstructors = () => {
     const [instructors, setInstructor] = useState([]);
-
     useEffect(() => {
-        fetch('/instructor.json')
+        fetch('http://localhost:5000/instructor')
             .then((res) => res.json())
             .then((data) => setInstructor(data.slice(0, 6)));
     }, []);
@@ -19,7 +18,7 @@ const PopularInstructors = () => {
                 {
                     instructors.map(instructor =>
                         <Instructorss
-                            key={instructor.id}
+                            key={instructor._id}
                             instructor={instructor}
                         ></Instructorss>
                     )
