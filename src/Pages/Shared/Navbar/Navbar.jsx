@@ -3,12 +3,15 @@ import logo from '../../../../public/logo.jpeg'
 import DropDown from './DropDown'
 import { Link } from 'react-router-dom'
 
+
 const Navbar = () => {
+   
     const navbarOptions = <>
-        <li className='font-bold'><Link to='/'>Home</Link></li> 
-        <li className='font-bold'><Link to='/instructors'>Instructors</Link></li> 
-        <li className='font-bold'><Link to='/allClasses'>Classes</Link></li> 
- 
+        <li className='font-bold'><Link to='/'>Home</Link></li>
+        <li className='font-bold'><Link to='/instructors'>Instructors</Link></li>
+        <li className='font-bold'><Link to='/allClasses'>Classes</Link></li>
+        
+
     </>
     return (
         <>

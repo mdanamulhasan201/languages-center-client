@@ -1,18 +1,32 @@
 import { AiOutlineMenu } from 'react-icons/ai'
 import Avatar from '../../../../public/avatar2.png'
-import {  useContext, useState } from 'react'
-import { AuthContext } from '../../../providers/AuthProvider'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../../providers/AuthProvider'
+import { toast } from 'react-hot-toast'
+import { FaCartPlus } from 'react-icons/fa'
 
 const DropDown = () => {
+    // const { user, logOut } = useContext(AuthContext)
     const { user, logOut } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
-  
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { 
+                toast.success('Log out Successful')
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
+
     return (
         <div className='relative z-50'>
             <div className='flex flex-row items-center gap-3'>
+            <button><FaCartPlus></FaCartPlus></button>
                 <div className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
-                   Dashboard
+                    Dashboard
                 </div>
                 {/* Dropdown btn */}
                 <div
@@ -21,9 +35,13 @@ const DropDown = () => {
                 >
                     <AiOutlineMenu />
                     <div className='hidden md:block'>
-                        <img src={Avatar} alt='profile'
+                        <img
+                            className='rounded-full'
+                            src={user && user.photoURL ? user.photoURL : Avatar}
+                            alt='profile'
                             height='30'
-                            width='30' />
+                            width='30'
+                        />
                     </div>
                 </div>
             </div>
@@ -32,7 +50,7 @@ const DropDown = () => {
                     <div className='flex flex-col cursor-pointer'>
                         {user ? (
                             <div
-                                onClick={logOut}
+                                onClick={handleLogOut}
                                 className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
                             >
                                 Logout

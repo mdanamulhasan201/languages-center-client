@@ -5,6 +5,8 @@ import Main from '../layouts/Main'
 import Login from '../Pages/Login/Login'
 import Instructors from '../Pages/Instructors/Instructors'
 import AllClasses from '../Pages/AlllClasses/AllClasses'
+import SignUp from '../Pages/SignUp/SignUp'
+import PrivateRoute from './PrivateRoute'
 
 export const router = createBrowserRouter([
   {
@@ -21,11 +23,15 @@ export const router = createBrowserRouter([
       },
       {
         path: 'allClasses',
-        element: <AllClasses></AllClasses>
+        element: <PrivateRoute><AllClasses></AllClasses></PrivateRoute>
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login></Login>
+      },
+      {
+        path: '/signup',
+        element: <SignUp></SignUp>
       }
     ]
   },

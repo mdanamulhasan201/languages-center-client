@@ -1,9 +1,14 @@
 import React from 'react';
 import TabAllClass from './TabAllClass';
+import { Helmet } from 'react-helmet-async';
 
 const AllClasses = () => {
     return (
         <>
+            <Helmet>
+                <title>Language Center | All Class</title>
+
+            </Helmet>
             <div className='-z-50' style={{ height: '680px', backgroundImage: `url("https://i.ibb.co/RTjFpG0/Blue-and-Purple-Simple-Modern-English-Course-Banner-1.png")`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                 <div className="flex items-center p-5 justify-start h-full ">
                     <div className="text-center md:ml-36">
