@@ -8,7 +8,6 @@ import { FaCartPlus } from 'react-icons/fa'
 import useCart from '../../../hook/useCart'
 
 const DropDown = () => {
-    // const { user, logOut } = useContext(AuthContext)
     const { user, logOut } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
 
