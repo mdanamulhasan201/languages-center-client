@@ -5,6 +5,9 @@ import { FaArrowRight } from "react-icons/fa";
 
 const PopularInstructors = () => {
     const [instructors, setInstructor] = useState([]);
+
+
+    
     useEffect(() => {
         fetch('http://localhost:5000/instructor')
             .then((res) => res.json())

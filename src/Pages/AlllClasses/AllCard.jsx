@@ -9,17 +9,20 @@ import './AllCard.css'
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { toast } from 'react-hot-toast';
+import useCart from '../../hook/useCart';
 
 const AllCard = ({ classs }) => {
     const { language, price, duration, image, deadline, enrolled, instructor, title, rating, _id } = classs
     const { user } = useContext(AuthContext)
+    const [cart, refetch] = useCart();
+
     const navigate = useNavigate()
     const location = useLocation()
 
     const handleAddToCart = classs => {
         console.log(classs)
         if (user && user.email) {
-            const addToCart = { classsId: _id, name, price, image, email: user.email }
+            const addToCart = { classsId: _id, language, instructor, price, image, email: user.email }
             fetch('http://localhost:5000/carts', {
                 method: 'POST',
                 headers: {
@@ -30,6 +33,7 @@ const AllCard = ({ classs }) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
+                        refetch()
                         toast.success('Add to Cart Successful')
                     }
                 })
