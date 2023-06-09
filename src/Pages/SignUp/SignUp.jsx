@@ -10,7 +10,7 @@ import { toast } from 'react-hot-toast';
 
 
 const SignUp = () => {
-    const { loading, setLoading, signInWithGoogle} = useContext(AuthContext);
+    const { loading, setLoading, signInWithGoogle } = useContext(AuthContext);
     const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const navigate = useNavigate()
@@ -27,31 +27,30 @@ const SignUp = () => {
         setError,
     } = useForm();
 
-    // const onSubmit = (data) => {
-    //     const { password, confirm } = data;
-    //     if (password !== confirm) {
-    //         setError('confirm', {
-    //             type: 'manual',
-    //             message: 'Passwords do not match',
-    //         });
-    //         return;
-    //     }
 
-    //     console.log(data);
-    // };
-    // handle Google signIn
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-            .then(res => {
-                console.log(res.user)
-                toast.success('Login Successful')
-                navigate(from, { replace: true })
+            .then(result => {
+                const loggedInUser = result.user;
+                console.log(loggedInUser)
+                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
+
+                fetch('http://localhost:5000/users', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate(from, { replace: true })
+                    })
+                toast.success('Login Successfully')
             })
-            .catch(error => {
-                console.log(error.message)
-                toast.error(error.message)
-                setLoading(false)
-            })
+            .catch((error) => {
+                setError('Valid email and password', error);
+            });
     }
 
 
@@ -59,13 +58,26 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
+                // console.log(loggedUser)
                 toast.success('Login Successful')
                 navigate(from, { replace: true })
 
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        // navigate(from, { replace: true })
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: "POST",
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+
+                                }
+                            })
                     })
                     .catch(error => {
                         toast.error(error.message)

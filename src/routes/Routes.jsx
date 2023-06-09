@@ -8,6 +8,10 @@ import AllClasses from '../Pages/AlllClasses/AllClasses'
 import SignUp from '../Pages/SignUp/SignUp'
 import Dashboard from '../layouts/Dashboard'
 import MyCart from '../Pages/DashBoard/MyCart/MyCart'
+import ManageUser from '../Pages/DashBoard/Admin/ManageUser/ManageUser'
+import AddClass from '../Pages/DashBoard/Instructor/AddClass/AddClass'
+import ManageClas from '../Pages/DashBoard/Instructor/ManageClasses/ManageClas'
+
 
 
 export const router = createBrowserRouter([
@@ -45,6 +49,18 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/mycart',
         element: <MyCart></MyCart>
+      },
+      {
+        path: '/dashboard/addClasses',
+        element: <AddClass></AddClass>
+      },
+      {
+        path: '/dashboard/manageClasses',
+        element: <ManageClas></ManageClas>
+      },
+      {
+        path: '/dashboard/adminmanageUser',
+        element: <ManageUser></ManageUser>
       }
     ]
   }

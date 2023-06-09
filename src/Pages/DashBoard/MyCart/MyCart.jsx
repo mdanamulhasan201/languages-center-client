@@ -63,11 +63,10 @@ const MyCart = () => {
             <Helmet>
                 <title>Language Center | Selected Classes</title>
             </Helmet>
-
             <div className="overflow-x-auto shadow-md">
                 <table className="table">
                     {/* head */}
-                    <thead>
+                    <thead className=' text-black'>
                         <tr>
                             <th>#</th>
                             <th>Image</th>
@@ -112,10 +111,12 @@ const MyCart = () => {
                     </button>
                 ))}
             </div>
-            <div className='flex justify-evenly mt-5 p-2 bg-[#F2F2F2] shadow-md font-bold text-xl mb-5'>
+            <div className='flex justify-around mt-5 p-2 bg-[#F2F2F2] shadow-md font-bold text-xl mb-5'>
                 <h3>Total Selected: {cart?.length}</h3>
-                <h3>Total Price: ${total}</h3>
-                <button className='btn btn-success btn-xs'>Pay Now</button>
+                <div className='flex'>
+                    <h3 className='mr-5'>Total Price: ${total}</h3>
+                    <button className='btn btn-success btn-xs'>Pay Now</button>
+                </div>
             </div>
         </div>
     );
