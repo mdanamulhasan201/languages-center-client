@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
 import { FaTrash, FaUserShield } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 const ManageUser = () => {
     const [currentPage, setCurrentPage] = useState(0);
@@ -12,6 +13,31 @@ const ManageUser = () => {
         return res.json();
     });
 
+    const handleMakeInstructor = user => {
+        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    refetch()
+                    toast.success(`${user.name} is an Instructor Now!`)
+                }
+            })
+    }
+
+    const handleMakeAdmin = user => {
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    refetch()
+                    toast.success(`${user.name} is an Admin Now!`)
+                }
+            })
+    }
 
     const handleDelete = user => {
 
@@ -61,13 +87,13 @@ const ManageUser = () => {
                                 <td>{user.email}</td>
                                 <td>
                                     {
-                                        user.role === 'admin' ? <button className='"btn rounded-md bg-green-400 btn-xs '> Admin</button> : <button className='"btn rounded-md bg-green-200 btn-xs '>Make Admin</button>
+                                        user.role === 'admin' ? <button className='"btn rounded-md bg-green-400 md:btn-xs btn-md '> Admin</button> : <button onClick={() => handleMakeAdmin(user)} className='"btn rounded-md bg-green-200 md:btn-xs btn-md '>Make Admin</button>
                                     }
                                 </td>
                                 <td >
 
                                     {
-                                        user.role === 'instructor' ? <button className='"btn rounded-md bg-rose-500 btn-xs '>Instructor</button> : <button className='"btn rounded-md bg-rose-200 btn-xs '>Make instructor</button>
+                                        user.role === 'instructor' ? <button className='"btn rounded-md bg-rose-400 font-bold md:btn-xs btn-md '>Instructor</button> : <button onClick={() => handleMakeInstructor(user)} className='"btn rounded-md bg-rose-200 md:btn-xs btn-md'>Make instructor</button>
                                     }
 
                                 </td>
@@ -85,7 +111,8 @@ const ManageUser = () => {
                 {Array.from({ length: Math.ceil(users.length / itemsPerPage) }, (_, index) => (
                     <button
                         key={index}
-                        className={`px-2 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        className={`px-2 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                            }`}
                         onClick={() => changePage(index + 1)}
                     >
                         {index + 1}

@@ -6,6 +6,7 @@ import { RiLogoutCircleLine } from 'react-icons/ri';
 import Avatar from '../../public/avatar2.png'
 import useCart from '../hook/useCart';
 import { AiFillFileAdd } from 'react-icons/ai';
+import { toast } from 'react-hot-toast';
 
 const Dashboard = () => {
 
