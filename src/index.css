@@ -5,4 +5,5 @@
 .drawer-side a.active {
    background: #55d6af;
    color: black;
+   box-shadow: 2px 2px 2px 1px rgb(234, 231, 231);
 }
