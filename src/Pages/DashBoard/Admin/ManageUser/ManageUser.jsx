@@ -3,14 +3,17 @@ import { Helmet } from 'react-helmet-async';
 import { useQuery } from '@tanstack/react-query';
 import { FaTrash, FaUserShield } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import useAxiosSecure from '../../../../hook/useAxiosSecure';
 
 const ManageUser = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 8; // Number of items to display per page
 
+    const [axiosSecure] = useAxiosSecure()
+
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users');
-        return res.json();
+        const res = await axiosSecure.get('/users' );
+        return res.data;
     });
 
     const handleMakeInstructor = user => {
