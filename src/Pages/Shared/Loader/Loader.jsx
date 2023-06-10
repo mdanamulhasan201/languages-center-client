@@ -12,7 +12,7 @@ const Loader = () => {
         items-center 
       '
         >
-            <HashLoader size={100} color='red' />
+            <HashLoader size={80} color='#55d6af' />
         </div>
     );
 };

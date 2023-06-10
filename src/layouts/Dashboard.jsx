@@ -21,12 +21,14 @@ const Dashboard = () => {
     const [isInstructor] = UseInstructor()
 
 
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut, setLoading } = useContext(AuthContext)
 
     const handleLogOut = () => {
         logOut()
             .then(() => {
                 toast.success('Log out Successful')
+                setLoading(false)
+                
             })
             .catch(error => {
                 toast.error(error.message)
@@ -85,6 +87,7 @@ const Dashboard = () => {
                                     </div>
 
                                     <div className="divider"></div>
+                                    <li className='my-2 '><NavLink to='/dashboard/adminMenu'><FaUserEdit ></FaUserEdit>Menu</NavLink></li>
                                     <li className='my-2 '><NavLink to='/dashboard/adminmanageClass'><FaUserEdit ></FaUserEdit>Manage Classes</NavLink></li>
                                     <li className='my-2'><NavLink to='/dashboard/adminmanageUser'><FaUserCheck></FaUserCheck>Manage Users</NavLink></li>
 
@@ -115,6 +118,8 @@ const Dashboard = () => {
                                         </div>
 
                                         <div className="divider"></div>
+                                        <li className='my-2 '><NavLink to='/dashboard/menu'><AiFillFileAdd ></AiFillFileAdd>Menu</NavLink></li>
+
                                         <li className='my-2 '><NavLink to='/dashboard/addClasses'><AiFillFileAdd ></AiFillFileAdd>Add Classes</NavLink></li>
                                         <li className='my-2'><NavLink to='/dashboard/manageClasses'><FaUsers></FaUsers>My Classes</NavLink></li>
 

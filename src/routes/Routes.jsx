@@ -12,6 +12,10 @@ import ManageUser from '../Pages/DashBoard/Admin/ManageUser/ManageUser'
 import AddClass from '../Pages/DashBoard/Instructor/AddClass/AddClass'
 import ManageClas from '../Pages/DashBoard/Instructor/ManageClasses/ManageClas'
 import PrivateRoute from './PrivateRoute'
+import Menu from '../Pages/DashBoard/Instructor/Menu/Menu'
+import AdminMenu from '../Pages/DashBoard/Admin/AdminMenu/AdminMenu'
+import AdminRoute from './AdminRoute'
+import InstructorRoute from './InstructorRoute'
 
 
 
@@ -53,16 +57,25 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/addClasses',
-        element: <AddClass></AddClass>
+        element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
+      },
+      {
+        path: '/dashboard/menu',
+        element: <InstructorRoute><Menu></Menu></InstructorRoute>
       },
       {
         path: '/dashboard/manageClasses',
-        element: <ManageClas></ManageClas>
+        element: <AdminRoute><ManageClas></ManageClas></AdminRoute>
       },
       {
         path: '/dashboard/adminmanageUser',
-        element: <ManageUser></ManageUser>
-      }
+        element: <AdminRoute><ManageUser></ManageUser></AdminRoute>
+      },
+
+      {
+        path: '/dashboard/adminMenu',
+        element: <AdminRoute><AdminMenu></AdminMenu></AdminRoute>
+      },
     ]
   }
 ])

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+
 import './PopularInstructor.css';
 import Instructorss from './Instructorss';
 import { FaArrowRight } from 'react-icons/fa';
@@ -9,15 +9,15 @@ const PopularInstructors = () => {
         const res = await fetch('http://localhost:5000/users');
         return res.json();
     });
-    const displayedInstructors = users.slice(0, 6);
-    // console.log(users)
+
+   
     return (
         <>
             <h2 className="text-center text-4xl font-bold my-10">
                 Popular <span className="text-[#55d6af]">Instructors</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8 ">
-                {displayedInstructors.map((instructor) => (
+                {users.map((instructor) => (
                     <Instructorss key={instructor._id} instructor={instructor} />
                 ))}
             </div>

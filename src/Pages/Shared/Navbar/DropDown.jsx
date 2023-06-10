@@ -6,12 +6,17 @@ import { AuthContext } from '../../../providers/AuthProvider'
 import { toast } from 'react-hot-toast'
 import { FaCartPlus } from 'react-icons/fa'
 import useCart from '../../../hook/useCart'
+import UseAdmin from '../../../hook/UseAdmin'
+import UseInstructor from '../../../hook/UseInstructor'
 
 const DropDown = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
 
     const [cart] = useCart();
+    const [isAdmin] = UseAdmin()
+    const [isInstructor] = UseInstructor()
+
 
     const handleLogOut = () => {
         logOut()
@@ -26,23 +31,23 @@ const DropDown = () => {
     return (
         <div className="relative z-50">
             <div className="flex flex-row items-center gap-3">
-                <Link to="/dashboard/mycart">
+               { <Link to="/dashboard/mycart">
                     <button className="btn btn-sm bg-[#55d6af]">
                         <FaCartPlus className="text-2xl" />
                         <p className="font-bold">+{cart?.length || 0}</p>
                     </button>
-                </Link>
+                </Link>}
 
-                {user && user.role === 'admin' && (
-                    <Link to="/admin/dashboard">
+                {isAdmin && (
+                    <Link to="/dashboard">
                         <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
                             Admin Dashboard
                         </div>
                     </Link>
                 )}
 
-                {user && user.role === 'instructor' && (
-                    <Link to="/instructor/dashboard">
+                {isInstructor && (
+                    <Link to="/dashboard">
                         <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
                             Instructor Dashboard
                         </div>

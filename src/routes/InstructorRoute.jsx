@@ -4,7 +4,7 @@ import Loader from '../Pages/Shared/Loader/Loader'
 import useAuth from '../hook/useAuth'
 import UseInstructor from '../hook/UseInstructor'
 
-const AdminRoute = ({ children }) => {
+const InstructorRoute = ({ children }) => {
     const { user, loading } = useAuth()
     const [isInstructor, isInstructorLoading] = UseInstructor()
     const location = useLocation()
@@ -19,5 +19,5 @@ const AdminRoute = ({ children }) => {
     return <Navigate to='/login' state={{ from: location }} replace></Navigate>
 }
 
-export default AdminRoute;
+export default InstructorRoute;
 

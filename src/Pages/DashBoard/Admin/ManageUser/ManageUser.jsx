@@ -7,7 +7,7 @@ import useAxiosSecure from '../../../../hook/useAxiosSecure';
 
 const ManageUser = () => {
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 8; // Number of items to display per page
+    const itemsPerPage = 5; // Number of items to display per page
 
     const [axiosSecure] = useAxiosSecure()
 
