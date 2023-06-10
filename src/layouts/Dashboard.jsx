@@ -7,13 +7,19 @@ import Avatar from '../../public/avatar2.png'
 import useCart from '../hook/useCart';
 import { AiFillFileAdd } from 'react-icons/ai';
 import { toast } from 'react-hot-toast';
+import UseInstructor from '../hook/UseInstructor';
+import UseAdmin from '../hook/UseAdmin';
+
+// import useAdmin from '../hook/UseAdmin';
 
 const Dashboard = () => {
 
     const [cart] = useCart()
 
-    const isAdmin = true
-    const isInstructor = true
+
+    const [isAdmin] = UseAdmin()
+    const [isInstructor] = UseInstructor()
+
 
     const { user, logOut } = useContext(AuthContext)
 
@@ -57,11 +63,22 @@ const Dashboard = () => {
                                         </div>
                                         <p className='mt-2 font-bold'>{user?.displayName} </p>
 
-                                        <div className='mt-2'>
-                                            <button onClick={handleLogOut} className='btn btn-sm btn-outline btn-success'>
-                                                <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
-                                            </button>
-                                        </div>
+                                        {
+                                            user ?
+                                                <div className='mt-2'>
+                                                    <button onClick={handleLogOut} className='btn btn-md btn-outline btn-success'>
+                                                        <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
+                                                    </button>
+                                                </div> :
+
+
+                                                <div className='mt-2'>
+                                                    <button className='btn btn-lg btn-outline btn-success'>
+                                                        <Link to='/login'>Login</Link>
+                                                    </button>
+                                                </div>
+
+                                        }
 
 
 
@@ -115,11 +132,25 @@ const Dashboard = () => {
                                             </div>
                                             <p className='mt-2 font-bold'>{user?.displayName} </p>
 
-                                            <div className='mt-2'>
-                                                <button onClick={handleLogOut} className='btn btn-sm btn-outline btn-success'>
-                                                    <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
-                                                </button>
-                                            </div>
+                                            {
+                                                user ?
+                                                    <div className='mt-2'>
+                                                        <button onClick={handleLogOut} className='btn btn-md btn-outline btn-success'>
+                                                            <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
+                                                        </button>
+                                                    </div> :
+
+
+                                                    <div className='mt-2 flex justify-center'>
+                                                        <button className='btn btn-md btn-outline btn-success flex'>
+                                                            <Link to='/login'>
+
+                                                                <span> Login</span>
+                                                            </Link>
+                                                        </button>
+                                                    </div>
+
+                                            }
 
 
 
