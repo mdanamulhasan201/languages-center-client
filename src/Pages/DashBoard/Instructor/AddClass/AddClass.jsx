@@ -1,18 +1,25 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
-// import useAxiosSecure from '../../../../hook/useAxiosSecure';
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+import useAxiosSecure from '../../../../hook/useAxiosSecure';
+import { useContext } from 'react';
+import { AuthContext } from '../../../../providers/AuthProvider';
+import { toast } from 'react-hot-toast';
 
+const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 console.log(img_hosting_token)
+
 const AddClass = () => {
-    // const [axiosSecure] = useAxiosSecure()
-    const { register, handleSubmit, reset } = useForm();
+    const { user } = useContext(AuthContext);
+    console.log(user.displayName)
+    const [axiosSecure] = useAxiosSecure()
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
     const onSubmit = data => {
-        const formData = new FormData()
-        formData.append('image', data.image[0])
+        const formData = new FormData();
+        formData.append('image', data.image[0]);
+
         fetch(img_hosting_url, {
             method: 'POST',
             body: formData
@@ -20,14 +27,35 @@ const AddClass = () => {
             .then(res => res.json())
             .then(imgResponse => {
                 if (imgResponse.success) {
-                    const imgURL = imgResponse.data.display_url
-                    // console.log(data, imgURL)
+                    const imgURL = imgResponse.data.display_url;
                     const { language, description, price, seats } = data;
-                    const newClass = { language, description, price:parseFloat(price), seats, image: imgURL }
-                    console.log(data)
+                    const { displayName, email, photoURL } = user; // Assuming the user object contains the user's name
+
+                    const newClass = {
+                        language,
+                        description,
+                        price: parseFloat(price),
+                        displayName,
+                        email,
+                        photoURL,
+                        seats,
+                        image: imgURL,
+                        status: 'pending'
+                    };
+
+                    axiosSecure.post('/classes', newClass)
+                        .then(response => {
+                            console.log('after posting new classes', response.data);
+                            if (response.data.insertedId) {
+                                reset()
+                                toast.success('Class Added Successfully')
+
+                            }
+                        });
                 }
-            })
+            });
     }
+
 
 
     return (
@@ -56,6 +84,7 @@ const AddClass = () => {
                             </label>
                             <select defaultValue='Pick One' {...register("language", { required: true })} className="select select-bordered">
                                 <option disabled>Select Language</option>
+                                <option disabled>Pick One</option>
                                 <option>English</option>
                                 <option>Spanish</option>
                                 <option>French</option>
@@ -77,6 +106,11 @@ const AddClass = () => {
                                 <span className="label-text font-bold">Price*</span>
                             </label>
                             <input type="number" placeholder="price" {...register("price", { required: true })} className="input input-bordered w-full " />
+                            {errors.price?.type === 'required' && (
+                                <p className='text-red-600 mt-2' role='alert'>
+                                    Price is required
+                                </p>
+                            )}
                         </div>
                     </div>
 
@@ -88,6 +122,11 @@ const AddClass = () => {
                                 <span className="label-text font-bold">Available seats*</span>
                             </label>
                             <input type="number" placeholder="Seats" {...register("seats", { required: true })} className="input input-bordered w-full " />
+                            {errors.seats?.type === 'required' && (
+                                <p className='text-red-600 mt-2' role='alert'>
+                                    Seat is required
+                                </p>
+                            )}
                         </div>
 
                         <div className="form-control w-full">
@@ -96,7 +135,11 @@ const AddClass = () => {
 
                             </label>
                             <input  {...register("image", { required: true })} type="file" className="file-input  file-input-bordered w-full max-w-xs" />
-
+                            {errors.image?.type === 'required' && (
+                                <p className='text-red-600 mt-2' role='alert'>
+                                    inset a photo
+                                </p>
+                            )}
                         </div>
                     </div>
 
@@ -107,7 +150,11 @@ const AddClass = () => {
 
                         </label>
                         <textarea {...register("description", { required: true })} className="textarea textarea-bordered h-72" placeholder="Class details"></textarea>
-
+                        {errors.description?.type === 'required' && (
+                            <p className='text-red-600 mt-2' role='alert'>
+                                Description is required
+                            </p>
+                        )}
                     </div>
 
 
