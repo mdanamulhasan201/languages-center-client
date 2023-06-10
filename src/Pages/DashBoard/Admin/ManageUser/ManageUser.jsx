@@ -52,6 +52,7 @@ const ManageUser = () => {
     // Get the current page of items
     const currentItems = users.slice(firstIndex, lastIndex);
 
+
     // Change the current page
     const changePage = (page) => {
         setCurrentPage(page);
@@ -76,6 +77,7 @@ const ManageUser = () => {
                             <th>Role</th>
                             <th>Role</th>
                             <th>Action</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,6 +87,7 @@ const ManageUser = () => {
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
+                                <td>{user?.image}</td>
                                 <td>
                                     {
                                         user.role === 'admin' ? <button className='"btn rounded-md bg-green-400 md:btn-xs btn-md '> Admin</button> : <button onClick={() => handleMakeAdmin(user)} className='"btn rounded-md bg-green-200 md:btn-xs btn-md '>Make Admin</button>

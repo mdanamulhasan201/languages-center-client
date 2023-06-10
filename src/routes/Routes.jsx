@@ -11,6 +11,7 @@ import MyCart from '../Pages/DashBoard/MyCart/MyCart'
 import ManageUser from '../Pages/DashBoard/Admin/ManageUser/ManageUser'
 import AddClass from '../Pages/DashBoard/Instructor/AddClass/AddClass'
 import ManageClas from '../Pages/DashBoard/Instructor/ManageClasses/ManageClas'
+import PrivateRoute from './PrivateRoute'
 
 
 
@@ -48,7 +49,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/dashboard/mycart',
-        element: <MyCart></MyCart>
+        element: <PrivateRoute><MyCart></MyCart></PrivateRoute>
       },
       {
         path: '/dashboard/addClasses',

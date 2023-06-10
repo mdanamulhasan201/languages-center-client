@@ -1,52 +1,38 @@
-import React, { useContext } from 'react';
-import { Rating } from '@smastrom/react-rating';
-import '@smastrom/react-rating/style.css';
-import { FaBook, FaArrowRight } from 'react-icons/fa';
-import { AuthContext } from '../../providers/AuthProvider';
+import React from 'react';
+import '@smastrom/react-rating/style.css'
+import { FaBook, FaArrowRight } from "react-icons/fa";
 
-const AllInstructor = ({ instructor }) => {
-    const { user } = useContext(AuthContext)
-    console.log(user)
+const Allnstructor = ({ instructor }) => {
+    if (instructor.role !== 'instructor') {
+        return null; // If the role is not 'instructor', don't render anything
+    }
+
     return (
-
-        <div className="card mx-auto md:w-96 bg-base-100 shadow-xl">
+        <div className="card md:w-80 md:h-96 mx-auto bg-base-100 shadow-xl">
             <figure className="image-container">
-                <img src={instructor.image} alt="Shoes" />
+                <img src={instructor.photo} className='rounded-md' alt="photo" />
             </figure>
-            <div className="card-body">
-                <div className="flex justify-between">
-                    <h2 className="card-title">
-                        {instructor.instructor}
-                        <div className="badge bg-[#55d6af]">{instructor.language}</div>
-                    </h2>
-
-                    {instructor.popular && (
-                        <div>
-                            <div className="badge badge-secondary">{instructor.popular}</div>
-                        </div>
-                    )}
-                </div>
-
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                {instructor.popular ? (
-                    <button className="justify-center btn btn-sm my-2 bg-[#55d6af]">
+            <hr className='my-2' />
+            <div className="card-body text-lg font-semibold text-gray-600">
+                <p><span className=' text-lg font-bold'>Name:</span> {instructor.name}</p>
+                <p>{instructor.email}</p>
+                <h2>{instructor.role}</h2>
+                <hr className='my-2' />
+                <button className="justify-center btn btn-sm my-2 bg-[#55d6af]">
                         Details <FaArrowRight />
                     </button>
-                ) : null}
-                <hr className="my-2" />
-                <div className="card-actions justify-between">
-                    <div className="badge badge-outline">
-                        <FaBook className="mr-1" />
-                        {instructor.courses}+ Courses
-                    </div>
-                    <div className="">
-                        <Rating style={{ maxWidth: 120 }} value={instructor.rating} readOnly />
-                    </div>
-                </div>
+
+                {/* <div className="card-actions justify-between">
+                    <div className="badge badge-outline"> <FaBook className='mr-1'></FaBook> {instructor.courses}+ Courses</div>
+                    <div className=""><Rating
+                        style={{ maxWidth: 120 }}
+                        value={instructor.rating}
+                        readOnly
+                    /></div>
+                </div> */}
             </div>
         </div>
-
     );
 };
 
-export default AllInstructor;
+export default Allnstructor;

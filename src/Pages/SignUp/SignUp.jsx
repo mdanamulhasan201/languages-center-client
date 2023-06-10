@@ -33,7 +33,7 @@ const SignUp = () => {
             .then(result => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser)
-                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
+                const saveUser = { name: loggedInUser.displayName, photo: loggedInUser.photoURL,  email: loggedInUser.email }
 
                 fetch('http://localhost:5000/users', {
                     method: "POST",

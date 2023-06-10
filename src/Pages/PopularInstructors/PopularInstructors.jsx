@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import './PopularInstructor.css'
+import './PopularInstructor.css';
 import Instructorss from './Instructorss';
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
 
 const PopularInstructors = () => {
-    const [instructors, setInstructor] = useState([]);
-
-
-    
-    useEffect(() => {
-        fetch('http://localhost:5000/instructor')
-            .then((res) => res.json())
-            .then((data) => setInstructor(data.slice(0, 6)));
-    }, []);
+    const { data: users = [], refetch } = useQuery(['users'], async () => {
+        const res = await fetch('http://localhost:5000/users');
+        return res.json();
+    });
+    const displayedInstructors = users.slice(0, 6);
+    // console.log(users)
     return (
         <>
-            <h2 className='text-center text-4xl font-bold my-10'>Popular <span className='text-[#55d6af]'>Instructors</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 ">
-
-                {
-                    instructors.map(instructor =>
-                        <Instructorss
-                            key={instructor._id}
-                            instructor={instructor}
-                        ></Instructorss>
-                    )
-                }
-
+            <h2 className="text-center text-4xl font-bold my-10">
+                Popular <span className="text-[#55d6af]">Instructors</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8 ">
+                {displayedInstructors.map((instructor) => (
+                    <Instructorss key={instructor._id} instructor={instructor} />
+                ))}
             </div>
             <div className="flex justify-center">
-                <button className="btn my-5">show more<FaArrowRight/> </button>
+                <button className="btn my-5">
+                    show more <FaArrowRight />
+                </button>
             </div>
         </>
-
     );
 };
 
