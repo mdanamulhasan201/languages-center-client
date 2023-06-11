@@ -11,11 +11,11 @@ const Instructorss = ({ instructor }) => {
     return (
         <div className="card md:w-80 md:h-96 mx-auto bg-base-100 shadow-xl">
             <figure className="image-container">
-                <img src={instructor.photo} className='rounded-md' alt="photo" />
+                <img src={instructor.photo} className='rounded-md h-48 w-48'  alt="photo" />
             </figure>
             <hr className='my-2' />
-            <div className="card-body text-lg font-semibold text-gray-600">
-                <p><span className=' text-lg font-bold'>Name:</span> {instructor.name}</p>
+            <div className="card-body text-md font-semibold text-gray-600">
+                <p><span className=' text-md font-bold'>Name:</span> {instructor.name}</p>
                 <p>{instructor.email}</p>
                 <h2>{instructor.role}</h2>
                 <hr className='my-2' />

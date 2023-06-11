@@ -1,11 +1,11 @@
 import React from 'react';
 
-const ManageClas = () => {
+const Myclass = () => {
     return (
         <div>
-            instructor 
+fdgdfg
         </div>
     );
 };
 
-export default ManageClas;
+export default Myclass;

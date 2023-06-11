@@ -2,13 +2,12 @@
 import './PopularInstructor.css';
 import Instructorss from './Instructorss';
 import { FaArrowRight } from 'react-icons/fa';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
+import InstructorUse from '../../hook/InstructorUse';
 
 const PopularInstructors = () => {
-    const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users');
-        return res.json();
-    });
+ const [users] = InstructorUse()
+ const slicedClasses = users.slice(0, 6); 
 
    
     return (
@@ -17,7 +16,7 @@ const PopularInstructors = () => {
                 Popular <span className="text-[#55d6af]">Instructors</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8 ">
-                {users.map((instructor) => (
+                {slicedClasses.map((instructor) => (
                     <Instructorss key={instructor._id} instructor={instructor} />
                 ))}
             </div>

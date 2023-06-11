@@ -1,0 +1,22 @@
+/* ManageClasses.css */
+
+.dark-theme {
+    background-color: #1a202c;
+    color: #fff;
+  }
+  
+  .dark-theme .table {
+    background-color: #2d3748;
+    color: #fff;
+  }
+  
+  .light-theme {
+    background-color: #f7fafc;
+    color: #333;
+  }
+  
+  .light-theme .table {
+    background-color: #fff;
+    color: #333;
+  }
+  

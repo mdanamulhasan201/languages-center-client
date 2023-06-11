@@ -10,12 +10,15 @@ import Dashboard from '../layouts/Dashboard'
 import MyCart from '../Pages/DashBoard/MyCart/MyCart'
 import ManageUser from '../Pages/DashBoard/Admin/ManageUser/ManageUser'
 import AddClass from '../Pages/DashBoard/Instructor/AddClass/AddClass'
-import ManageClas from '../Pages/DashBoard/Instructor/ManageClasses/ManageClas'
+// import ManageClas from '../Pages/DashBoard/Instructor/ManageClasses/ManageClas'
 import PrivateRoute from './PrivateRoute'
 import Menu from '../Pages/DashBoard/Instructor/Menu/Menu'
 import AdminMenu from '../Pages/DashBoard/Admin/AdminMenu/AdminMenu'
 import AdminRoute from './AdminRoute'
 import InstructorRoute from './InstructorRoute'
+import Myclass from '../Pages/DashBoard/Instructor/MyClass/Myclass'
+import ManageClasses from '../Pages/DashBoard/Admin/ManageClasses/ManageClasses'
+import Payment from '../Pages/DashBoard/Payment/Payment'
 
 
 
@@ -56,6 +59,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><MyCart></MyCart></PrivateRoute>
       },
       {
+        path: '/dashboard/payment',
+        element: <Payment></Payment>
+      },
+      {
         path: '/dashboard/addClasses',
         element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
       },
@@ -64,9 +71,13 @@ export const router = createBrowserRouter([
         element: <InstructorRoute><Menu></Menu></InstructorRoute>
       },
       {
-        path: '/dashboard/manageClasses',
-        element: <AdminRoute><ManageClas></ManageClas></AdminRoute>
+        path: '/dashboard/MyClasses',
+        element: <Myclass></Myclass>
       },
+      // {
+      //   path: '/dashboard/manageClasses',
+      //   element: <AdminRoute><ManageClas></ManageClas></AdminRoute>
+      // },
       {
         path: '/dashboard/adminmanageUser',
         element: <AdminRoute><ManageUser></ManageUser></AdminRoute>
@@ -76,6 +87,11 @@ export const router = createBrowserRouter([
         path: '/dashboard/adminMenu',
         element: <AdminRoute><AdminMenu></AdminMenu></AdminRoute>
       },
+
+      {
+        path: '/dashboard/ManageClasses',
+        element: <ManageClasses></ManageClasses>
+      }
     ]
   }
 ])

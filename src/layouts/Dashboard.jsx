@@ -29,9 +29,11 @@ const Dashboard = () => {
                 toast.success('Log out Successful')
                 setLoading(false)
                 
+
             })
             .catch(error => {
                 toast.error(error.message)
+                setLoading(true)
             })
     }
     return (
@@ -54,9 +56,12 @@ const Dashboard = () => {
 
 
                         {
-                            isAdmin ?
+
+                            isInstructor ?
                                 <>
-                                    <h1 className="text-2xl bg-[#55d6af] font-bold text-center py-4"> Admin Dashboard</h1>
+
+
+                                    <h1 className="text-2xl bg-[#55d6af] font-bold text-center py-4"> Instructor Dashboard</h1>
                                     <div className='text-center mt-5'>
                                         <div className="avatar">
                                             <div className="w-24 rounded-full ring ring-green-100 ring-offset-[#55d6af] ring-offset-2">
@@ -65,40 +70,32 @@ const Dashboard = () => {
                                         </div>
                                         <p className='mt-2 font-bold'>{user?.displayName} </p>
 
-                                        {
-                                            user ?
-                                                <div className='mt-2'>
-                                                    <button onClick={handleLogOut} className='btn btn-md btn-outline btn-success'>
-                                                        <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
-                                                    </button>
-                                                </div> :
-
-
-                                                <div className='mt-2'>
-                                                    <button className='btn btn-lg btn-outline btn-success'>
-                                                        <Link to='/login'>Login</Link>
-                                                    </button>
-                                                </div>
-
-                                        }
-
+                                        <div className='mt-2'>
+                                            <button onClick={handleLogOut} className='btn btn-sm btn-outline btn-success'>
+                                                <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
+                                            </button>
+                                        </div>
 
 
                                     </div>
 
                                     <div className="divider"></div>
-                                    <li className='my-2 '><NavLink to='/dashboard/adminMenu'><FaUserEdit ></FaUserEdit>Menu</NavLink></li>
-                                    <li className='my-2 '><NavLink to='/dashboard/adminmanageClass'><FaUserEdit ></FaUserEdit>Manage Classes</NavLink></li>
-                                    <li className='my-2'><NavLink to='/dashboard/adminmanageUser'><FaUserCheck></FaUserCheck>Manage Users</NavLink></li>
+                                    <li className='my-2 '><NavLink to='/dashboard/menu'><AiFillFileAdd ></AiFillFileAdd>Menu</NavLink></li>
 
-
+                                    <li className='my-2 '><NavLink to='/dashboard/addClasses'><AiFillFileAdd ></AiFillFileAdd>Add Classes</NavLink></li>
+                                    <li className='my-2'><NavLink to='/dashboard/MyClasses'><FaUsers></FaUsers>My Classes</NavLink></li>
 
                                 </>
-                                : isInstructor ?
+
+
+
+
+                                :
+
+
+                                isAdmin ?
                                     <>
-
-
-                                        <h1 className="text-2xl bg-[#55d6af] font-bold text-center py-4"> Instructor Dashboard</h1>
+                                        <h1 className="text-2xl bg-[#55d6af] font-bold text-center py-4"> Admin Dashboard</h1>
                                         <div className='text-center mt-5'>
                                             <div className="avatar">
                                                 <div className="w-24 rounded-full ring ring-green-100 ring-offset-[#55d6af] ring-offset-2">
@@ -107,25 +104,47 @@ const Dashboard = () => {
                                             </div>
                                             <p className='mt-2 font-bold'>{user?.displayName} </p>
 
-                                            <div className='mt-2'>
-                                                <button onClick={handleLogOut} className='btn btn-sm btn-outline btn-success'>
-                                                    <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
-                                                </button>
-                                            </div>
+                                            {
+                                                user ?
+                                                    <div className='mt-2'>
+                                                        <button onClick={handleLogOut} className='btn btn-md btn-outline btn-success'>
+                                                            <Link><RiLogoutCircleLine className='text-xl font-bold '></RiLogoutCircleLine></Link>
+                                                        </button>
+                                                    </div> :
+
+
+                                                    <div className='mt-2'>
+                                                        <button className='btn btn-lg btn-outline btn-success'>
+                                                            <Link to='/login'>Login</Link>
+                                                        </button>
+                                                    </div>
+
+                                            }
 
 
 
                                         </div>
 
                                         <div className="divider"></div>
-                                        <li className='my-2 '><NavLink to='/dashboard/menu'><AiFillFileAdd ></AiFillFileAdd>Menu</NavLink></li>
+                                        <li className='my-2 '><NavLink to='/dashboard/adminMenu'><FaUserEdit ></FaUserEdit>Menu</NavLink></li>
+                                        <li className='my-2 '><NavLink to='/dashboard/ManageClasses'><FaUserEdit ></FaUserEdit>Manage Classes</NavLink></li>
+                                        <li className='my-2'><NavLink to='/dashboard/adminmanageUser'><FaUserCheck></FaUserCheck>Manage Users</NavLink></li>
 
-                                        <li className='my-2 '><NavLink to='/dashboard/addClasses'><AiFillFileAdd ></AiFillFileAdd>Add Classes</NavLink></li>
-                                        <li className='my-2'><NavLink to='/dashboard/manageClasses'><FaUsers></FaUsers>My Classes</NavLink></li>
 
 
                                     </>
+
+
+
+
                                     :
+
+
+
+
+
+
+
 
                                     <>
                                         <h1 className="text-2xl bg-[#55d6af] font-bold text-center py-4"> User Dashboard</h1>

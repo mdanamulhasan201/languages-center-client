@@ -14,6 +14,8 @@ const AddClass = () => {
     console.log(user.displayName)
     const [axiosSecure] = useAxiosSecure()
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
+
+
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
     const onSubmit = data => {
@@ -147,12 +149,20 @@ const AddClass = () => {
                     <div className="form-control mt-5">
                         <label className="label">
                             <span className="label-text font-bold">Class Details*</span>
-
                         </label>
-                        <textarea {...register("description", { required: true })} className="textarea textarea-bordered h-72" placeholder="Class details"></textarea>
-                        {errors.description?.type === 'required' && (
-                            <p className='text-red-600 mt-2' role='alert'>
+                        <textarea
+                            {...register("description", { required: true, maxLength: 100 })}
+                            className="textarea textarea-bordered h-72"
+                            placeholder="Description max 100 characters long"
+                        ></textarea>
+                        {errors.description?.type === "required" && (
+                            <p className="text-red-600 mt-2" role="alert">
                                 Description is required
+                            </p>
+                        )}
+                        {errors.description?.type === "maxLength" && (
+                            <p className="text-red-600 mt-2" role="alert">
+                                Description max 100 characters long
                             </p>
                         )}
                     </div>
