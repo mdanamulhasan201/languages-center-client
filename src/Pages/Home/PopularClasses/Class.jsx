@@ -20,7 +20,7 @@ const Class = ({ classs }) => {
         console.log(classs)
         if (user && user.email) {
             const addToCart = { classsId: _id, language, instructor: displayName, price, image, email: user.email }
-            fetch(' https://language-center-server.vercel.app/carts', {
+            fetch(' http://localhost:5000/carts', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

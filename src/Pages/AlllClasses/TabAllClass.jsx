@@ -16,7 +16,7 @@ const TabAllClass = () => {
     
 
     // useEffect(() => {
-    //     fetch(' https://language-center-server.vercel.app/classes')
+    //     fetch(' http://localhost:5000/classes')
     //         .then((res) => res.json())
     //         .then((data) => setClasses(data));
     // }, []);

@@ -4,7 +4,7 @@ const InstructorUse = () => {
     const { data: classes = [], isLoading: loading } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
-            const res = await fetch(' https://language-center-server.vercel.app/classes');
+            const res = await fetch(' http://localhost:5000/classes');
             return res.json()
            
         }
