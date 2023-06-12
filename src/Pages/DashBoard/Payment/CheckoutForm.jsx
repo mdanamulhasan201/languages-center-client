@@ -14,6 +14,7 @@ const CheckoutForm = ({ price, cart }) => {
     const [clientSecret, setClientSecret] = useState('')
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
+    const [paymentStatus, setPaymentStatus] = useState('success');
 
     useEffect(() => {
         if (price > 0) {
@@ -26,9 +27,8 @@ const CheckoutForm = ({ price, cart }) => {
     }, [price, axiosSecure])
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         if (!stripe || !elements) {
-
             return;
         }
 
@@ -45,11 +45,10 @@ const CheckoutForm = ({ price, cart }) => {
         if (error) {
             setCardError(error.message);
         } else {
-            setCardError('')
-            // console.log('[PaymentMethod]', paymentMethod);
+            setCardError('');
         }
 
-        setProcessing(true)
+        setProcessing(true);
 
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
@@ -65,16 +64,14 @@ const CheckoutForm = ({ price, cart }) => {
         );
 
         if (confirmError) {
-            console.log(confirmError)
+            console.log(confirmError);
         }
 
-
-        console.log('payment intent', paymentIntent)
-        setProcessing(false)
-        if (paymentIntent.status === 'succeeded') {
-            setTransactionId(paymentIntent.id)
-            const transactionId = paymentIntent.id
-            //save payment information to the server 
+        setProcessing(false);
+        if (paymentIntent && paymentIntent.status === 'succeeded') {
+            setTransactionId(paymentIntent.id);
+            const transactionId = paymentIntent.id;
+            // Save payment information to the server 
             const payment = {
                 user: user?.displayName,
                 email: user?.email,
@@ -84,19 +81,22 @@ const CheckoutForm = ({ price, cart }) => {
                 quantity: cart.length,
                 cartItems: cart.map(item => item._id),
                 classsId: cart.map(item => item.classsId),
-                status: 'service pending',
+                status: paymentStatus,
                 itemNames: cart.map(item => item.language)
-            }
+            };
+            
             axiosSecure.post('/payments', payment)
                 .then(res => {
-                    console.log(res.data)
-                    if (res.data.insertedId) {
-                        // display confirm
+                    console.log(res.data);
+                    if (res.data.insertResult && res.data.insertResult.insertedCount > 0) {
+                        
+                        setPaymentStatus('success');
+                      
+                        // Display confirmation to the user
                     }
-                })
-
+                });
         }
-    }
+    };
 
 
 

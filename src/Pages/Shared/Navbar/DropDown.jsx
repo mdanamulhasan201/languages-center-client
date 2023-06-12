@@ -4,7 +4,7 @@ import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider'
 import { toast } from 'react-hot-toast'
-import { FaCartPlus } from 'react-icons/fa'
+import { FaCartPlus, FaSun } from 'react-icons/fa'
 import useCart from '../../../hook/useCart'
 import UseAdmin from '../../../hook/UseAdmin'
 import UseInstructor from '../../../hook/UseInstructor'
@@ -34,28 +34,26 @@ const DropDown = () => {
 
 
                 {
-                    isAdmin ?
+                    isAdmin ? (
                         <Link to="/dashboard">
                             <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
-                             Dashboard
+                                Dashboard
                             </div>
                         </Link>
-                        :
-
-                        isInstructor ?
-
-                            <Link to="/dashboard">
-                                <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
-                                   Dashboard
-                                </div>
-                            </Link>
-                            :
-                            <Link to="/dashboard/mycart">
-                                <button className="btn btn-sm bg-[#55d6af]">
-                                    <FaCartPlus className="text-2xl" />
-                                    <p className="font-bold">+{cart?.length || 0}</p>
-                                </button>
-                            </Link>
+                    ) : isInstructor ? (
+                        <Link to="/dashboard">
+                            <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+                                Dashboard
+                            </div>
+                        </Link>
+                    ) : user ? (
+                        <Link to="/dashboard/mycart">
+                            <button className="btn btn-sm bg-[#55d6af]">
+                                <FaCartPlus className="text-2xl" />
+                                <p className="font-bold">+{cart?.length || 0}</p>
+                            </button>
+                        </Link>
+                    ) : <FaSun className='text-2xl'></FaSun>
                 }
 
 

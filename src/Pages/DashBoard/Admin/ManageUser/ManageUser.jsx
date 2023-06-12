@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FaTrash, FaUserShield } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import useAxiosSecure from '../../../../hook/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const ManageUser = () => {
     const [currentPage, setCurrentPage] = useState(0);
@@ -12,7 +13,7 @@ const ManageUser = () => {
     const [axiosSecure] = useAxiosSecure()
 
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await axiosSecure.get('/users' );
+        const res = await axiosSecure.get('/users');
         return res.data;
     });
 
@@ -42,9 +43,36 @@ const ManageUser = () => {
             })
     }
 
-    const handleDelete = user => {
+  // delete class
+  const handleDelete = user => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`http://localhost:5000/users/${user._id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        refetch();
+                        Swal.fire(
+                            'Deleted!',
+                            'user has been deleted.',
+                            'success'
+                        )
+                    }
+                })
 
-    }
+        }
+    })
+}
 
     // Calculate the index of the last item in the current page
     const lastIndex = currentPage * itemsPerPage;
@@ -75,12 +103,14 @@ const ManageUser = () => {
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
                             <th>Role</th>
+                            <th>Role</th>
                             <th>Action</th>
-                            <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -88,9 +118,17 @@ const ManageUser = () => {
                         {currentItems.map((user, index) => (
                             <tr key={user._id}>
                                 <th>{index + 1}</th>
+                                <td>
+                                    <div className="avatar">
+                                        <div className="w-14 rounded-full">
+                                            <img src={user.photo} />
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user?.image}</td>
+                                <td>{user.role}</td>
+
                                 <td>
                                     {
                                         user.role === 'admin' ? <button className='"btn rounded-md bg-green-400 md:btn-xs btn-md '> Admin</button> : <button onClick={() => handleMakeAdmin(user)} className='"btn rounded-md bg-green-200 md:btn-xs btn-md '>Make Admin</button>

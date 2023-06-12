@@ -182,8 +182,8 @@ const Dashboard = () => {
 
                                         <div className="divider"></div>
                                         <li className='my-2 '><NavLink to='/dashboard/mycart'><FaUserEdit ></FaUserEdit>Selected Classes</NavLink></li>
-                                        <li className='my-2'><NavLink to='/dashboard/enrolledClass'><FaUserCheck></FaUserCheck>Enrolled Classes</NavLink></li>
-                                        <li className='my-2'><NavLink to='/dashboard/history'><FaWallet></FaWallet>Payment History</NavLink></li>
+                                        <li className='my-2'><NavLink to='/dashboard/enroll'><FaUserCheck></FaUserCheck>Enrolled Classes</NavLink></li>
+                                        <li className='my-2'><NavLink to='/dashboard/paymentHistory'><FaWallet></FaWallet>Payment History</NavLink></li>
                                     </>
                         }
 
@@ -193,7 +193,7 @@ const Dashboard = () => {
                         <li className='my-2'><NavLink to='/'><FaHome></FaHome>Home</NavLink></li>
                         <li className='my-2'><NavLink to='/allClasses'><FaUserGraduate></FaUserGraduate>All Classes</NavLink></li>
                         <li className='my-2'><NavLink to='/instructors'><FaUserTie></FaUserTie>Instructor</NavLink></li>
-                        <li className='my-2'><NavLink to='/instructors'><FaCommentAlt></FaCommentAlt>Contact</NavLink></li>
+                       
                     </ul>
                 </div>
             </div >
