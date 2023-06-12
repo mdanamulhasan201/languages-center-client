@@ -11,7 +11,7 @@ const PaymentHistory = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(` http://localhost:5000/payment/${user?.email}`)
+    fetch(` https://language-center-server.vercel.app/payment/${user?.email}`)
       .then(res => res.json())
       .then(data => {
         setMyPayment(data);

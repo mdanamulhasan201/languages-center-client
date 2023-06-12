@@ -35,7 +35,7 @@ const SignUp = () => {
                 console.log(loggedInUser)
                 const saveUser = { name: loggedInUser.displayName, photo: loggedInUser.photoURL,  email: loggedInUser.email }
 
-                fetch(' http://localhost:5000/users', {
+                fetch(' https://language-center-server.vercel.app/users', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'
@@ -66,7 +66,7 @@ const SignUp = () => {
                 
                     .then(() => {
                         const saveUser = { name: data.name, email: data.email,  photo: data.photo }
-                        fetch(' http://localhost:5000/users', {
+                        fetch(' https://language-center-server.vercel.app/users', {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'

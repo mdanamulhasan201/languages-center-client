@@ -12,7 +12,7 @@ const PaymentHistory = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(` http://localhost:5000/payment/${user?.email}`)
+        fetch(` https://language-center-server.vercel.app/payment/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 const filteredPayments = data.filter(payment => payment.status === 'success');
