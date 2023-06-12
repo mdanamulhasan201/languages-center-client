@@ -31,8 +31,7 @@ const ManageClasses = () => {
           'Your file has been deny.',
           'success'
         )
-        // console.log(res)
-        // setDisabled(true)
+      
         refetch()
       }
 
