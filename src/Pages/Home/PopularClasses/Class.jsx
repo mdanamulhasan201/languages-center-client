@@ -2,19 +2,47 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css'
-import { IoIosPeople } from "react-icons/io";
-import { IoIosTime } from "react-icons/io";
-import { FaArrowRight } from "react-icons/fa";
-// import InstructorUse from '../../../hook/InstructorUse';
+import { FaArrowRight, FaShoppingCart } from "react-icons/fa";
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../../providers/AuthProvider';
+import useCart from '../../../hook/useCart';
+import { useContext } from 'react';
+;
 
 
 const Class = ({ classs }) => {
-    const { language, price, duration, displayName, image, seats, enrolled, description, photoURL, rating } = classs
+    const { language, price, displayName, image, photoURL, seats, instructor, description, rating, _id } = classs
+    const { user } = useContext(AuthContext)
+    const [cart, refetch] = useCart();
 
 
+    const handleAddToCart = classs => {
+        console.log(classs)
+        if (user && user.email) {
+            const addToCart = { classsId: _id, language, instructor: displayName, price, image, email: user.email }
+            fetch(' https://language-center-server.vercel.app/carts', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(addToCart)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        refetch()
+                        toast.success('Add to Cart Successful')
+                    }
+                })
+        }
+        else {
+            toast.error('Please login to Enrolled the language')
+            navigate('/login', { state: { from: location } })
+        }
+    }
     return (
 
-        <div  className="card mx-auto  shadow-xl">
+        <div className="card mx-auto bg-red-400 shadow-xl">
             <img src={image} className="card__image" alt="" />
             <div className="card__overlay">
                 <div className="card__header justify-center">
@@ -23,17 +51,17 @@ const Class = ({ classs }) => {
                     <div className="card__header-text">
 
                         <div className='flex justify-around'>
-                        <div>
+                            <div>
                                 <div className=' badge bg-[#55d6af]'>{language}</div>
                             </div>
-                            
+
                             <div className='ms-2 badge badge-secondary '> $ {price}</div>
                         </div>
 
-                      
+
                         <div> <h3 className="card__title mt-5">{displayName}</h3></div>
 
-                     
+
 
                         <div className='flex justify-around my-2 items-center'>
                             <div className='flex'>
@@ -53,18 +81,22 @@ const Class = ({ classs }) => {
 
 
                     </div>
+
+
                 </div>
                 <p className="card__description text-2xl font-bold">{description}</p>
 
                 <div className='flex'>
-                   <div>
-                        <button className="btn btn-sm mb-5 ms-4">Get Enrolled<FaArrowRight /> </button>
+                    <div>
+                        <button onClick={() => handleAddToCart(classs)} className="btn btn-sm mb-5 ms-4">
+                            <FaShoppingCart className='text-xl' />
+                            Add to Cart</button>
                     </div>
                     <div>
                         <Link to='/'>
                             <button className="btn btn-sm bg-[#55d6af] mb-5 ms-4">
-                                <div className='flex'> 
-                                    Learn More 
+                                <div className='flex'>
+                                    Learn More
                                     <div><FaArrowRight /></div>
                                 </div>  </button>
                         </Link>

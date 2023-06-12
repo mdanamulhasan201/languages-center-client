@@ -2,23 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import AllCard from './AllCard';
+import UseClasses from '../../hook/UseClasses';
 
 
 const TabAllClass = () => {
     const [tabIndex, setTabIndex] = useState(0)
 
-    const [classes, setClasses] = useState([]);
+    // const [classes, setClasses] = useState([]);
 
 
-
+    const [classes] = UseClasses()
 
     
 
-    useEffect(() => {
-        fetch('http://localhost:5000/classes')
-            .then((res) => res.json())
-            .then((data) => setClasses(data));
-    }, []);
+    // useEffect(() => {
+    //     fetch(' https://language-center-server.vercel.app/classes')
+    //         .then((res) => res.json())
+    //         .then((data) => setClasses(data));
+    // }, []);
 
 
     const English = classes.filter(classs => classs.language === 'English')

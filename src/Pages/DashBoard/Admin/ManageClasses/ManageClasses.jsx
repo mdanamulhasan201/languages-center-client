@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 const ManageClasses = () => {
     const [classes] = UseClasses();
-  
+
     const [disabled, setDisabled] = useState(false)
     const [axiosSecure, refetch] = useAxiosSecure()
 
@@ -14,35 +14,75 @@ const ManageClasses = () => {
     const itemsPerPage = 8; // Number of items to display per page
     const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-
-    const handleDeny = (singleClass) => {
+    const handleDeny = (classes) => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, deny it!'
         }).then((result) => {
-            if (result.isConfirmed) {
+          if (result.isConfirmed) {
+            axiosSecure.patch(`/classes/${classes._id}`)
+              .then(res => {
+                classes.status = 'deny';
+                console.log(res.data);
+                refetch();
+                setDisabled(classes.status === 'deny');
+              })
+              .catch(error => {
+                console.error(error);
+                // Handle any error that occurs during the request
+              });
+      
+            Swal.fire(
+              'Deny!',
+              'Your file has been deny.',
+              'success'
+            );
+          }
+        });
+      };
+    const handleConfirm = (classes) => {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Confirm it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axiosSecure.patch(`/classes/${classes._id}`)
+              .then(res => {
+                classes.status = 'approve';
+                console.log(res.data);
+                refetch();
+                setDisabled(classes.status === 'approve');
+              })
+              .catch(error => {
+                console.error(error);
+                // Handle any error that occurs during the request
+              });
+      
+            Swal.fire(
+              'Approve!',
+              'Your file has been approve.',
+              'success'
+            );
+          }
+        });
+      };
 
-                axiosSecure.patch(`/classes/${singleClass._id}`)
-                    .then(res => {
-                        singleClass.status = 'deny'
-                        console.log(res)
-                        // refetch()
-                        setDisabled(singleClass.status === 'deny')
-                    })
-                  Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                  )
-            }
-        })
-    }
-
+      
+      
+      
+      
+      
+      
     // Calculate the index of the last item in the current page
     const lastIndex = (currentPage + 1) * itemsPerPage;
 
@@ -103,18 +143,32 @@ const ManageClasses = () => {
                                 <td>{classs.seats}</td>
                                 <td>${classs.price}</td>
                                 <td>
-                                    <button className='"btn rounded-md bg-green-400 md:btn-xs btn-md '>Approve</button>
+                                    <button onClick={()=> handleConfirm(classes)} className='"btn rounded-md bg-green-400 md:btn-xs btn-md '>Approve</button>
                                 </td>
-                                <td><button
-                                   onClick={() => handleDeny(singleClass)} // Pass 'classs' as an argument
+                                <td>
+                                    <button
+                                    onClick={() => handleDeny(classes)} // Pass 'classs' as an argument
                                     disabled={disabled}
-                                    className='"btn rounded-md bg-rose-400 font-bold md:btn-xs btn-md '
+                                    className='btn rounded-md bg-rose-400 font-bold md:btn-xs btn-md '
                                 >
                                     Deny
                                 </button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-ghost btn-xs">details</button>
+                                    {/* The button to open modal */}
+                                    <label htmlFor="my_modal_6" className="btn  rounded-md md:btn-xs">Feedback</label>
+
+                                    {/* Put this part before </body> tag */}
+                                    <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+                                    <div className="modal">
+                                        <div className="modal-box">
+                                            <h3 className="font-bold text-lg mb-5">Write your feedback</h3>
+                                            <textarea className="textarea textarea-accent" placeholder="feedback"></textarea>
+                                            <div className="modal-action">
+                                                <label htmlFor="my_modal_6" className="btn btn-error md:btn-xs">Close!</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

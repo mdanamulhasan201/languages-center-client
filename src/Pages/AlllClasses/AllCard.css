@@ -25,12 +25,13 @@
     border-radius: calc(var(--curve) * 1px);
     overflow: hidden;
     text-decoration: none;
+    border-radius:20px;
    
    
   }
   
   .card__image {
-    width: 600px;
+    width: 300px;
     height: 400px;
   }
   

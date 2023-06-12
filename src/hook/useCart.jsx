@@ -11,7 +11,7 @@ const useCart = () => {
         queryKey: ['carts', user?.email],
         enabled: !loading,
         // queryFn: async () => {
-        //     const responsive = await fetch(`http://localhost:5000/carts?email=${user?.email}`, {
+        //     const responsive = await fetch(` https://language-center-server.vercel.app/carts?email=${user?.email}`, {
         //         headers: {
         //             authorization: `bearer ${token}`
         //         }

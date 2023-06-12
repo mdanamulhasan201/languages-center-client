@@ -21,6 +21,7 @@ import ManageClasses from '../Pages/DashBoard/Admin/ManageClasses/ManageClasses'
 import Payment from '../Pages/DashBoard/Payment/Payment'
 import PaymentHistory from '../Pages/DashBoard/Payment/PaymentHistory'
 import MyEnroll from '../Pages/DashBoard/Payment/MyEnroll'
+import Error from '../Pages/Error/Error'
 
 
 
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: '/',
@@ -84,10 +86,6 @@ export const router = createBrowserRouter([
         path: '/dashboard/MyClasses',
         element: <PrivateRoute> <Myclass></Myclass></PrivateRoute>
       },
-      // {
-      //   path: '/dashboard/manageClasses',
-      //   element: <AdminRoute><ManageClas></ManageClas></AdminRoute>
-      // },
       {
         path: '/dashboard/adminmanageUser',
         element: <AdminRoute><ManageUser></ManageUser></AdminRoute>

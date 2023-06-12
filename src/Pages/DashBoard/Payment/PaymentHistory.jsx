@@ -11,7 +11,7 @@ const PaymentHistory = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/payment/${user?.email}`)
+    fetch(` https://language-center-server.vercel.app/payment/${user?.email}`)
       .then(res => res.json())
       .then(data => {
         setMyPayment(data);
@@ -39,7 +39,7 @@ const PaymentHistory = () => {
 
   return (
     <>
-                  <h3 className='text-center text-2xl font-bold my-5'>Payment<span className='text-[#55d6af]'>History</span></h3>
+      <h3 className='text-center text-2xl font-bold my-5'>Payment<span className='text-[#55d6af]'> History</span></h3>
       {loading ? (
         <div className="flex justify-center">
           <Loader />
@@ -51,11 +51,12 @@ const PaymentHistory = () => {
             <thead>
               <tr className=' bg-base-200'>
                 <th>#</th>
-                <th>Name</th>
+                <th>User email</th>
                 <th>transactionId</th>
                 <th>Quantity</th>
                 <th>Payment</th>
                 <th>Status</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>
@@ -67,11 +68,12 @@ const PaymentHistory = () => {
                 currentItems.map((paymentItem, index) => (
                   <tr key={index}>
                     <td>{firstIndex + index + 1}</td>
-                    <td>{paymentItem.user}</td>
+                    <td>{paymentItem.email}</td>
                     <td>{paymentItem.transactionId}</td>
                     <td>{paymentItem.quantity}</td>
                     <td>$ {paymentItem.price}</td>
                     <td>{paymentItem.status}</td>
+                    <td>{paymentItem.date}</td>
                   </tr>
                 ))
               )}
