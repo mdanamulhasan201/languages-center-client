@@ -47,8 +47,13 @@ const Myclass = () => {
                     <td>{index + 1}</td>
                     <td>{classItem.language}</td>
                     <td>$ {classItem.price}</td>
-                    <td>Status{}</td>
-                    <td>feedback{}</td>
+                    <td >
+
+                      <button className='btn  btn-xs'>
+                        {classItem.status}
+                      </button>
+                    </td>
+                    <td>feedback{ }</td>
                   </tr>
                 ))
               )}
