@@ -14,7 +14,7 @@ const AllClasses = () => {
                     <div className="text-center md:ml-36">
                         <p className='text-white text-start text-xl font-bold'>Online Class</p>
                         <p className='text-white text-start text-6xl font-bold'>
-                            Foreign Language
+                            Foreign Languages
                             <br />
                             Courses
                         </p>
